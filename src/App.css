@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300..700&display=swap');
+
+* { box-sizing: border-box; margin: 0; }
+body { font-family: 'Sora', system-ui, sans-serif; background: #0b1020; color: #f2f4fb; }
+:focus-visible { outline: 3px solid #f2f4fb; outline-offset: 3px; }
+
+.app { position: fixed; inset: 0; background: #0b1020; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.loading { position: absolute; inset: 0; display: grid; place-content: center; opacity: 0.7; }
+
+/* ---------- UI fija ---------- */
+.top {
+  position: absolute; inset: 0 0 auto 0; z-index: 2; pointer-events: none;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 4vw; font-weight: 600;
+}
+.counter { font-variant-numeric: tabular-nums; opacity: 0.8; }
+
+.dots {
+  position: absolute; right: 2.2vw; top: 50%; z-index: 2; transform: translateY(-50%);
+  display: grid; gap: 1.1rem;
+}
+.dots button {
+  width: 14px; height: 14px; padding: 0; cursor: pointer;
+  border: 2px solid var(--dot); border-radius: 50%; background: transparent;
+  transition: transform 0.25s, background 0.25s;
+}
+.dots button[aria-current='true'] { background: var(--dot); transform: scale(1.35); }
+
+/* ---------- Paneles de texto (dentro de <Scroll html>) ---------- */
+.panel { height: 100vh; display: flex; align-items: center; padding: 0 8vw; }
+.panel.right { justify-content: flex-end; }
+.card { max-width: 27rem; }
+.num { display: block; margin-bottom: 1rem; font-weight: 600; color: var(--c); letter-spacing: 0.08em; }
+.card h2 { font-size: clamp(2.4rem, 5.6vw, 4.8rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; }
+.card p { margin-top: 1.4rem; font-size: 1.1rem; line-height: 1.6; opacity: 0.88; }
+
+/* En vertical el objeto queda arriba y el texto abajo, sobre un fondo suave para que se lea */
+@media (max-aspect-ratio: 1/1) {
+  .panel, .panel.right { align-items: flex-end; justify-content: flex-start; padding: 0 6vw 9vh; }
+  .card { padding: 1.2rem; border-radius: 12px; background: rgb(11 16 32 / 0.62); backdrop-filter: blur(6px); }
+  .dots { right: 1.4vw; }
+}
